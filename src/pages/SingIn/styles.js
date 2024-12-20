@@ -28,4 +28,7 @@ export const Content = styled.div`
     display: flex;
     flex-direction: column;
     gap: 3.2rem;
+    overflow: visible;
+    justify-content: center;
+    align-items: center;
 `
