@@ -31,4 +31,22 @@ export const Content = styled.div`
     overflow: visible;
     justify-content: center;
     align-items: center;
+
+    > div {
+        box-sizing: content-box;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        overflow: visible;
+        width: 100%;
+        align-items: start;
+        justify-content: start;
+
+        > span {
+            font-family: 'Roboto', sans-serif;
+            color: ${({theme}) => theme.COLORS.LIGHT_400};
+            font-size: 1.6rem;
+            width: 100%;
+        }
+    }
 `

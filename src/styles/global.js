@@ -54,11 +54,6 @@ export default createGlobalStyle`
         filter: brightness(.9);
     }
 
-    button {
-        background-color: ${({theme}) => theme.COLORS.TOMATO_100};
-        color: ${({theme}) => theme.COLORS.LIGHT_100};
-    }
-
     ul, li {
         text-decoration: none;
         list-style: none;
