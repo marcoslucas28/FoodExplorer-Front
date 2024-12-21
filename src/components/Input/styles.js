@@ -4,7 +4,7 @@ export const Container = styled.div`
     background-color: ${({theme}) => theme.COLORS.DARK_900};
     border-radius: 8px;
     height: 4.8rem;
-    width: 100%;
+    width: 94%;
     display: flex;
     gap: 1.4rem;
     padding: 1rem 1rem;

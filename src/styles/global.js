@@ -21,7 +21,7 @@ export default createGlobalStyle`
         box-sizing: border-box;
 
         --scroll-track-color: #2f3538;
-        --scroll-thumb-color: #111c73;
+        --scroll-thumb-color:rgb(17, 37, 163);
         --scroll-size: 8px;
 
         scrollbar-color: var(--scroll-thumb-color) var(--scroll-track-color)
@@ -30,7 +30,9 @@ export default createGlobalStyle`
     body {
         height: 100vh;
 
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
+
 
         background-color: ${({theme}) => theme.COLORS.DARK_400};
         color: ${({theme}) => theme.COLORS.LIGHT_100};

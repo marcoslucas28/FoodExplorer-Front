@@ -7,6 +7,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin-top: 5rem;
 `
 
 export const Title = styled.div`
@@ -31,6 +32,8 @@ export const Content = styled.div`
     overflow: visible;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    padding: 2rem;
 
     > div {
         box-sizing: content-box;
@@ -48,5 +51,12 @@ export const Content = styled.div`
             font-size: 1.6rem;
             width: 100%;
         }
+    }
+
+    a {
+        background: transparent;
+        border: none;
+        font-size: 1.6rem;
+        color: ${({theme}) => theme.COLORS.LIGHT_100};
     }
 `
