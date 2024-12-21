@@ -4,6 +4,7 @@ import { FiMail } from 'react-icons/fi'
 
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
+import { ButtonText } from '../../components/ButtonText'
 
 import icon from '../../assets/Polygon 1.svg'
 
@@ -27,6 +28,8 @@ export function SingIn(){
                 </div>
 
                 <Button title="Entrar" />
+
+                <ButtonText title="Criar uma conta" />
                 
             </Content>
         </Container>
