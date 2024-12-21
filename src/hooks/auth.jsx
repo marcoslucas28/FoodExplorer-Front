@@ -25,6 +25,14 @@ function AuthProvider({children}){
         }
     }
 
+    useEffect(() => {
+        const user = localStorage.getItem("@foodexplorer:user")
+
+        if(user){
+            setData({user})
+        }
+    }, [])
+
     return(
         <AuthContext.Provider value={{user: data.user, singIn}}>{children}</AuthContext.Provider>
     )
