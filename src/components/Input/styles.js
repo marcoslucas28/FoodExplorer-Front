@@ -6,7 +6,7 @@ export const Container = styled.div`
     height: 4.8rem;
     width: 94%;
     display: flex;
-    gap: 1.4rem;
+    gap: 0.5rem;
     padding: 1rem 1rem;
     justify-content: center;
     align-items: center;
@@ -22,7 +22,6 @@ export const Container = styled.div`
 
         &::placeholder{
             color: ${({theme}) => theme.COLORS.LIGHT_500};
-            font-size: 1.6rem;
             font-family: 'Roboto', sans-serif;
         }
     }

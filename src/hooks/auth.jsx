@@ -25,16 +25,22 @@ function AuthProvider({children}){
         }
     }
 
+    function SingOut(){
+        localStorage.removeItem("@foodexplorer:user")
+
+        setData({})
+    }
+
     useEffect(() => {
         const user = localStorage.getItem("@foodexplorer:user")
 
         if(user){
-            setData({user})
+            setData({user: JSON.parse(user)})
         }
     }, [])
 
     return(
-        <AuthContext.Provider value={{user: data.user, singIn}}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{user: data.user, singIn, SingOut}}>{children}</AuthContext.Provider>
     )
 }
 
