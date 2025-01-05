@@ -4,7 +4,7 @@ export function ButtonText({title, isBigSize=true, icon: Icon, ...rest}){
     return(
         <Container $isbigsize={isBigSize} {...rest}>
             {Icon && <Icon />}
-            {title}
+            <span>{title}</span>
         </Container>
     )
 }

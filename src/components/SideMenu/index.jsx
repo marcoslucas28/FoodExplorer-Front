@@ -15,7 +15,7 @@ export function SideMenu({isVisible = false, onCloseMenu, onSearchDishes}){
     const { SingOut, user } = useAuth()
 
     return (
-        <Container isVisible={isVisible}>
+        <Container $isvisible={isVisible}>
             <Header>
                 <Close onClick={onCloseMenu}>
                     <IoIosClose />

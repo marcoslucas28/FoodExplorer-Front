@@ -8,7 +8,11 @@ export const Container = styled.aside`
     height: 100vh;
     background-color: ${({theme}) => theme.COLORS.DARK_400};
     transition: transform .4s ease-in-out;
-    transform: ${({isVisible}) => isVisible ? `translateX(0)` : `translateX(-100%)`};
+    transform: ${({$isvisible}) => $isvisible ? `translateX(0)` : `translateX(-100%)`};
+    display: grid;
+    grid-template-rows: 20vh auto 10vh;
+    grid-template-columns: 100%;
+    grid-template-areas: 'header' 'content' 'footer';
 `
 
 export const Header = styled.header`
@@ -21,6 +25,7 @@ export const Header = styled.header`
     align-items: center;
     text-align: center;
     justify-content:  flex-start;
+    grid-area: header;
 
     span {
         color: ${({theme}) => theme.COLORS.LIGHT_100};
@@ -45,6 +50,7 @@ export const Close = styled.button`
 export const Content = styled.div`
     margin: 3.6rem auto 0;
     width: 90%;
+    grid-area: content;
 `
 
 export const List = styled.div`

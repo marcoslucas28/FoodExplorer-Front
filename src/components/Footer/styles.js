@@ -2,13 +2,12 @@ import styled from 'styled-components'
 
 export const Container = styled.footer`
     width: 100%;
-    height: 15vh;
-    position: absolute;
-    bottom: 0;
+    height: 10vh;
     background-color: ${({theme}) => theme.COLORS.DARK_600};
     display: flex;
     justify-content: center;
     align-items: center;
+    grid-area: footer;
 `
 
 export const Content = styled.div`

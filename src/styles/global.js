@@ -28,7 +28,7 @@ export default createGlobalStyle`
     }
 
     body {
-        height: 100vh;
+        height: 100%;
 
         overflow-x: hidden;
         overflow-y: auto;

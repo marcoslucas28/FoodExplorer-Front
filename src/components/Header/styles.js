@@ -3,11 +3,12 @@ import styled from 'styled-components'
 export const Container = styled.header`
     background-color: ${({theme}) => theme.COLORS.DARK_700};
     padding: 2rem;
-    height: 20vh;
+    height: 15vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    grid-area: header;
 `
 
 export const Title = styled.div`

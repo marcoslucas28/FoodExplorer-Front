@@ -5,10 +5,14 @@ export const Container = styled.button`
     border: none;
     font-size: ${({$isbigsize}) => $isbigsize ? '2.4rem' : '1.655rem'};
     color: ${({theme}) => theme.COLORS.LIGHT_300};
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: auto;
+    flex: 0 0 auto;
 
     svg {
-        width: ${({$isbigsize}) => $isbigsize ? '3.2rem' : '2.2rem'};
+        font-size: ${({$isbigsize}) => $isbigsize ? '3.2rem' : '2.5rem'};
         color: ${({theme}) => theme.COLORS.LIGHT_100};
-        margin-right: 1rem;
     }
 `
