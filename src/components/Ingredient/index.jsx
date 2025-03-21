@@ -6,9 +6,9 @@ import { FiPlus } from 'react-icons/fi'
 export function Ingredient({isNew = false, value, onClick, ...rest}){
     return(
         <Container $isnew={isNew}>
-            <input type="text" value={value} readOnly={!isNew} {...rest} />
+            { isNew ? <input type="text" value={value} readOnly={!isNew} {...rest} /> : <span>{value}</span> }
 
-            <button onClick={onClick}>
+            <button type="button" onClick={onClick}>
                 {isNew ? <FiPlus /> : <FiX />}
             </button>
         </Container>

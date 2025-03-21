@@ -30,7 +30,7 @@ export const Form = styled.form`
         display: flex;
         flex-direction: column;
 
-        span{
+        > span{
             font-size: 1.6rem;
             font-family: 'Roboto';
             color: ${({theme}) => theme.COLORS.LIGHT_400};

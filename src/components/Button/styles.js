@@ -14,4 +14,9 @@ export const Container = styled.button`
     box-sizing: content-box;
     border-radius: 5px;
     height: 30px;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 `

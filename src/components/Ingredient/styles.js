@@ -18,6 +18,10 @@ export const Container = styled.div`
 
     flex: 0 1 10px;
 
+    span {
+        margin-right: 8px;
+    }
+
     button {
         background: none;
         border: 0;
