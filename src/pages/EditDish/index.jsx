@@ -1,4 +1,4 @@
-import { Container, Content, Ingredients, InputText, InputOption, Form } from './styles'
+import { Container, Content, Ingredients, InputText, InputOption, Form, ButtonsContent } from './styles'
 
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
@@ -11,24 +11,41 @@ import { Button } from '../../components/Button'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { api } from '../../services/api'
 
-export function NewDish(){
+export function EditDish(){
     const navigate = useNavigate()
+    const params = useParams()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
 
     const [loading, setLoading] = useState(false)
     const [name, setName] = useState("")
     const [image, setImage] = useState(null)
     const [category, setCategory] = useState("meals")
-    const [price, setPrice] = useState("")
+    const [price, setPrice] = useState()
     const [description, setDescription] = useState("")
     const [ingredientsTags, setIngredient] = useState([])
     const [newIngredient, setNewIngredient] = useState("")
+
+    useEffect(() => {
+        async function fetchPlate(){
+            const dishInfo = await api.get(`/dishes/${params.id}`)
+
+            const { name, description, price, ingredients, category } = dishInfo.data
+
+            setName(name)
+            setDescription(description)
+            setPrice(price)
+            setCategory(category)
+            setIngredient(ingredients.map(item => item.name))
+        }
+
+        fetchPlate()
+    }, [])
 
     function toggleMenu(){
         setIsMenuVisible(!isMenuVisible)
@@ -36,6 +53,16 @@ export function NewDish(){
 
     function handleBack(){
         navigate(-1)
+    }
+
+    async function handleRemoveDish(){
+        const check = confirm("Tem certeza que deseja excluir o prato? Essa ação não poderá ser desfeita")
+
+        if(check){
+            await api.delete(`/dishes/${params.id}`)
+
+            navigate(-1)
+        }
     }
 
     function handleAddIngredient(){
@@ -51,15 +78,15 @@ export function NewDish(){
         setIngredient((prevState) => prevState.filter((tag) => tag !== deleted))
     }
 
-    async function handleNewDish(){
+    async function handleEditDish(){
         setLoading(true)
 
-        if(!name || !image || !category || !price || !description || ingredientsTags <= 0){
+        if(!name & !image & !category & !price & !description & ingredientsTags <= 0){
             if(ingredientsTags <= 0){
-                return alert("Por favor, informe os ingredientes de seu prato")
+                return alert("O prato não pode ter nenhum ingrediente.")
             }
 
-            return alert("Preencha todos os campos para cadastrar seu prato")
+            return alert("Preencha pelo menos um campo para atualizar seu prato")
         }
 
         if(newIngredient){
@@ -79,15 +106,15 @@ export function NewDish(){
                 data.append('ingredients[]', ingredient)
             })
 
-            await api.post("/dishes", data)
-            alert("Prato adicionado")
+            await api.put(`/dishes/${params.id}`, data)
+            alert("Alterações salvas")
             navigate(-1)
             
         } catch (error) {
             if(error.response){
                 alert(error.response.data.message)
             }else {
-                alert("Não foi possivel cadastrar o novo prato")
+                alert("Não foi possivel saval as alterações")
             }
         } finally{
             setLoading(false)
@@ -103,25 +130,25 @@ export function NewDish(){
             <Content>
                 <ButtonText onClick={handleBack} isBigSize={false} title="Voltar" icon={MdKeyboardArrowLeft} />
 
-                <h1>Novo prato</h1>
+                <h1>Editar prato</h1>
 
                 <Form>
                     <div>
-                        <span>Imagem</span>
+                        <span>Imagem do prato</span>
 
-                        <FileInput placeholder="Selecione imagem" onChange={(e) => setImage(e.target.files[0])} />
+                        <FileInput placeholder="Selecione imagem para alterá-la" onChange={(e) => setImage(e.target.files[0])} />
                     </div>
 
                     <div>
                         <span>Nome</span>
 
-                        <InputText placeholder="Ex.: Salada Ceasar" onChange={(e) => setName(e.target.value)} />
+                        <InputText placeholder="Ex.: Salada Ceasar" onChange={(e) => setName(e.target.value)} value={name} />
                     </div>
 
                     <div>
                         <span>Categoria</span>
 
-                        <InputOption onChange={(e) => setCategory(e.target.value)}>
+                        <InputOption onChange={(e) => setCategory(e.target.value)} value={category}>
                             <option value="meals">Refeição</option>
                             <option value="desserts">Sobremesa</option>
                             <option value="drinks">Bebida</option>
@@ -152,16 +179,20 @@ export function NewDish(){
                     <div>
                         <span>Preço</span>
 
-                        <InputText onChange={(e) => setPrice(e.target.value)} type="number" step="0,01" placeholder="R$ 00,00" />
+                        <InputText value={price} onChange={(e) => setPrice(e.target.value)}  type="number" step="0,01" placeholder="R$ 00,00" />
                     </div>
 
                     <div>
                         <span>Descrição</span>
 
-                        <TextArea onChange={(e) => setDescription(e.target.value)} placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
+                        <TextArea onChange={(e) => setDescription(e.target.value)} value={description} placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
                     </div>
 
-                    <Button onClick={handleNewDish} type="button" disabled={loading} title="Salvar alterações" />
+                    <ButtonsContent>
+                        <Button onClick={handleEditDish} type="button" disabled={loading} title="Salvar alterações" />
+                        <Button onClick={handleRemoveDish} isDelete={true} type="button" disabled={loading} title="Excluir prato" />
+                    </ButtonsContent>
+                    
                 </Form>
             </Content>
 

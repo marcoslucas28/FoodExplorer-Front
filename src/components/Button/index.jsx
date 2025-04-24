@@ -1,7 +1,7 @@
 import { Container } from './styles'
 
-export function Button({title, ...rest}){
+export function Button({title, isDelete=false, ...rest}){
     return(
-        <Container {...rest}>{title}</Container>
+        <Container $isdelete={isDelete} {...rest}>{title}</Container>
     )
 }

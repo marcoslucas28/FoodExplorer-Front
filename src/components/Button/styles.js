@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.button`
-    background-color: ${({theme}) => theme.COLORS.TOMATO_100};
+    background-color: ${({theme, $isdelete}) => $isdelete ? theme.COLORS.DARK_800 : theme.COLORS.TOMATO_100};
     color: ${({theme}) => theme.COLORS.LIGHT_100};
     border: none;
     width: 100%;
