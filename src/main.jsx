@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')).render(
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop
-        closeOnClick
+        closeOnClick={false}
         pauseOnHover
         theme="dark"
         draggable

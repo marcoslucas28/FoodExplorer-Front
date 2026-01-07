@@ -43,6 +43,14 @@ export default createGlobalStyle`
         }
     }
 
+     .Toastify__toast {
+        font-size: 1.6rem;
+    }
+
+    .Toastify__toast-body {
+        font-size: 1.6rem;
+    }
+
     a{
         text-decoration: none;
     }

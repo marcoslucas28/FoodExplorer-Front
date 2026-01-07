@@ -11,6 +11,8 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { api } from '../../services/api'
 
+import { notifySuccess, notifyError, notifyLoading, updateToast, notifyInfo } from '../../utils/toast'
+
 import { useState } from 'react'
 
 export function SingUp(){
@@ -23,23 +25,23 @@ export function SingUp(){
 
     function handleSingUp(){
         if(!name || !email || !password){
-            return alert("Preencha todos os campos")
+            return notifyInfo("Preencha todos os campos")
         }
 
         if(password.length < 6){
-            return alert("A sua senha tem que ter no mínimo 6 caracteres")
+            return notifyInfo("A sua senha tem que ter no mínimo 6 caracteres")
         }
 
         setLoading(true)
 
         api.post("/users", {name, email, password}).then(() => {
-            alert("usuário cadastrado com sucesso")
+            notifySuccess("usuário cadastrado com sucesso")
             navigate(-1)
         }).catch((error) => {
             if(error.response){
-                alert(error.response.data.message)
+                notifyError(error.response.data.message)
             }else {
-                alert("Não foi possivel cadastrar o usuário")
+                notifyError("Não foi possivel cadastrar o usuário")
             }
         }).finally(() => setLoading(false))
     }

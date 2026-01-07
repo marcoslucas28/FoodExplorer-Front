@@ -6,10 +6,13 @@ const AuthContext = createContext({})
 
 const SESSION_DURATION = 7 * 24 * 60 * 60 * 1000 // 7 dias em ms
 
+import { notifySuccess, notifyError, notifyLoading, updateToast } from '../utils/toast'
+
 function AuthProvider({children}){
     const [data, setData] = useState({})
 
     async function singIn({email, password}){
+        const tostID = notifyLoading("Entrando...")
         try {
             const response = await api.post("/sessions", {email, password})
             const { user } = response.data
@@ -22,11 +25,12 @@ function AuthProvider({children}){
             localStorage.setItem("@foodexplorer:session", JSON.stringify(sessionData))
 
             setData({user})
+            updateToast(tostID, "Login realizado com sucesso!", "success")
         } catch (error) {
             if(error.response){
-                alert(error.response.data.message)
+                updateToast(tostID, error.response.data.message, "error")
             }else {
-                alert("Não foi possivel entrar")
+                updateToast(tostID, "Não foi possivel entrar", "error")
                 console.log(error)
             }
         }

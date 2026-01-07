@@ -17,6 +17,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { api } from '../../services/api'
 
+import { notifyError, notifySuccess, notifyInfo } from '../../utils/toast'
+
 export function NewDish(){
     const navigate = useNavigate()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
@@ -40,7 +42,7 @@ export function NewDish(){
 
     function handleAddIngredient(){
         if(newIngredient == ''){
-            return alert("O campo de adicionar ingrediente esta vazio. Por favor, preencha o campo para adicionar novo ingrediente")
+            return notifyInfo("O campo de adicionar ingrediente esta vazio. Por favor, preencha o campo para adicionar novo ingrediente")
         }
 
         setIngredient((prevState) => [...prevState, newIngredient])
@@ -56,14 +58,16 @@ export function NewDish(){
 
         if(!name || !image || !category || !price || !description || ingredientsTags <= 0){
             if(ingredientsTags <= 0){
-                return alert("Por favor, informe os ingredientes de seu prato")
+                setLoading(false)
+                return notifyInfo("Por favor, informe os ingredientes de seu prato")
             }
-
-            return alert("Preencha todos os campos para cadastrar seu prato")
+            setLoading(false)
+            return notifyInfo("Preencha todos os campos para cadastrar seu prato")
         }
 
         if(newIngredient){
-            return alert("Você deixou um ingrediente no campo para adicionar, adicione o ingrediente ou deixe o campo vazio")
+            setLoading(false)
+            return notifyInfo("Você deixou um ingrediente no campo para adicionar, adicione o ingrediente ou deixe o campo vazio")
         }
 
         try {
@@ -80,14 +84,14 @@ export function NewDish(){
             })
 
             await api.post("/dishes", data)
-            alert("Prato adicionado")
+            notifySuccess("Prato adicionado")
             navigate(-1)
             
         } catch (error) {
             if(error.response){
-                alert(error.response.data.message)
+                notifyError(error.response.data.message)
             }else {
-                alert("Não foi possivel cadastrar o novo prato")
+                notifyError("Não foi possivel cadastrar o novo prato")
             }
         } finally{
             setLoading(false)

@@ -17,6 +17,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { api } from '../../services/api'
 
+import { notifyError, notifySuccess, notifyInfo, confirmToast } from '../../utils/toast'
+
 export function EditDish(){
     const navigate = useNavigate()
     const params = useParams()
@@ -26,13 +28,13 @@ export function EditDish(){
     const [name, setName] = useState("")
     const [image, setImage] = useState(null)
     const [category, setCategory] = useState("meals")
-    const [price, setPrice] = useState()
+    const [price, setPrice] = useState("")
     const [description, setDescription] = useState("")
     const [ingredientsTags, setIngredient] = useState([])
     const [newIngredient, setNewIngredient] = useState("")
 
     useEffect(() => {
-        async function fetchPlate(){
+        async function fetchPlate(){    
             const dishInfo = await api.get(`/dishes/${params.id}`)
 
             const { name, description, price, ingredients, category } = dishInfo.data
@@ -56,10 +58,11 @@ export function EditDish(){
     }
 
     async function handleRemoveDish(){
-        const check = confirm("Tem certeza que deseja excluir o prato? Essa ação não poderá ser desfeita")
+        const check = await confirmToast("Tem certeza que deseja excluir o prato? Essa ação não poderá ser desfeita.")
 
         if(check){
             await api.delete(`/dishes/${params.id}`)
+            notifySuccess("Prato excluído")
 
             navigate(-1)
         }
@@ -67,7 +70,7 @@ export function EditDish(){
 
     function handleAddIngredient(){
         if(newIngredient == ''){
-            return alert("O campo de adicionar ingrediente esta vazio. Por favor, preencha o campo para adicionar novo ingrediente")
+            return notifyInfo("O campo de adicionar ingrediente esta vazio. Por favor, preencha o campo para adicionar novo ingrediente")
         }
 
         setIngredient((prevState) => [...prevState, newIngredient])
@@ -83,14 +86,17 @@ export function EditDish(){
 
         if(!name & !image & !category & !price & !description & ingredientsTags <= 0){
             if(ingredientsTags <= 0){
-                return alert("O prato não pode ter nenhum ingrediente.")
+                setLoading(false)
+                return notifyInfo("O prato não pode ter nenhum ingrediente.")
             }
 
-            return alert("Preencha pelo menos um campo para atualizar seu prato")
+            setLoading(false)
+            return notifyInfo("Preencha pelo menos um campo para atualizar seu prato")
         }
 
         if(newIngredient){
-            return alert("Você deixou um ingrediente no campo para adicionar, adicione o ingrediente ou deixe o campo vazio")
+            setLoading(false)
+            return notifyInfo("Você deixou um ingrediente no campo para adicionar, adicione o ingrediente ou deixe o campo vazio")
         }
 
         try {
@@ -107,14 +113,14 @@ export function EditDish(){
             })
 
             await api.put(`/dishes/${params.id}`, data)
-            alert("Alterações salvas")
+            notifySuccess("Alterações salvas")
             navigate(-1)
             
         } catch (error) {
             if(error.response){
-                alert(error.response.data.message)
+                notifyError(error.response.data.message)
             }else {
-                alert("Não foi possivel saval as alterações")
+                notifyError("Não foi possivel salvar as alterações")
             }
         } finally{
             setLoading(false)

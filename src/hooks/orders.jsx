@@ -1,13 +1,20 @@
 import { useContext, createContext, useState, useEffect } from 'react'
 
 import { api } from '../services/api'
+import { useAuth } from './auth'
 
 const OrdersContext = createContext({})
 
 function OrdersProvider({children}){
     const [pendingOrdersCount, setPendingOrdersCount] = useState(0)
+    const { user } = useAuth()
 
     useEffect(() => {
+        if (!user || user.isAdmin) {
+            setPendingOrdersCount(0)
+            return
+        }
+
         const fetchOrderCount = async () => {
             try {
                 const response = await api.get('/orders/pending')
@@ -24,7 +31,7 @@ function OrdersProvider({children}){
         const interval = setInterval(fetchOrderCount, 5000) // Atualiza a cada 5 segundos
 
         return () => clearInterval(interval)
-    }, [])
+    }, [user])
 
     return (
         <OrdersContext.Provider value={{ pendingOrdersCount }}>
