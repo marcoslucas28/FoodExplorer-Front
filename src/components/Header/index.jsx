@@ -6,9 +6,11 @@ import logoIcon from '../../assets/Polygon 1.svg'
 import order_card from '../../assets/order_card.svg'
 
 import { useAuth } from '../../hooks/auth'
+import { useOrders } from '../../hooks/orders'
 
 export function Header({onMenuClick}){
     const { user } = useAuth()
+    const { pendingOrdersCount } = useOrders()
 
     return(
         <Container>
@@ -35,7 +37,7 @@ export function Header({onMenuClick}){
             {!user.isAdmin && (
                 <Orders>
                     <img src={order_card} alt="icone de pedidos" />
-                    <span>0</span>
+                    <span>{pendingOrdersCount}</span>
                 </Orders>
             )}
 

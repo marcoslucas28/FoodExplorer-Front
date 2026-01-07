@@ -8,11 +8,29 @@ import { Footer } from '../Footer'
 
 import { useNavigate } from 'react-router-dom'
 
+import { useEffect } from 'react'
+
 import { useAuth } from '../../hooks/auth'
 
 export function SideMenu({isVisible = false, onCloseMenu, onSearchDishes}){
     const navigate = useNavigate()
     const { SingOut, user } = useAuth()
+
+    useEffect(() => {
+            if (isVisible) {
+                document.body.style.overflow = "hidden";
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth"
+                });
+            } else {
+                document.body.style.overflow = "auto";
+            }
+            return () => {
+                document.body.style.overflow = "auto";
+            };
+        }, [isVisible]);
 
     return (
         <Container $isvisible={isVisible}>

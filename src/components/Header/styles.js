@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.header`
     background-color: ${({theme}) => theme.COLORS.DARK_700};
     padding: 2rem;
-    height: 15vh;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -5,7 +5,7 @@ export const Container = styled.aside`
     z-index: 1;
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: ${({theme}) => theme.COLORS.DARK_400};
     transition: transform .4s ease-in-out;
     transform: ${({$isvisible}) => $isvisible ? `translateX(0)` : `translateX(-100%)`};
@@ -13,6 +13,8 @@ export const Container = styled.aside`
     grid-template-rows: 20vh auto 10vh;
     grid-template-columns: 100%;
     grid-template-areas: 'header' 'content' 'footer';
+
+
 `
 
 export const Header = styled.header`
