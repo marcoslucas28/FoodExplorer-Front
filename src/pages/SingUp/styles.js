@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { DEVICE } from "../../styles/device"
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -9,6 +11,10 @@ export const Container = styled.div`
     height: 100vh;
     margin-top: 10rem;
     box-sizing: content-box;
+
+    ${DEVICE.lg} {
+        flex-direction: row;
+    }
 `
 
 export const Title = styled.div`
@@ -35,6 +41,19 @@ export const Content = styled.div`
     align-items: center;
     width: 100%;
     padding: 2rem;
+    max-width: 50rem;
+
+    ${DEVICE.lg} {
+        padding: 6.4rem;
+        background-color: ${({theme}) => theme.COLORS.DARK_700};
+        border-radius: 1.6rem;
+    }
+
+    h2 {
+        color: ${({theme}) => theme.COLORS.LIGHT_100};
+        font-size: 3rem;
+        font-weight: 400;
+    }
 
     > div {
         box-sizing: content-box;

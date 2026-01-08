@@ -15,11 +15,16 @@ import { notifySuccess, notifyError, notifyLoading, updateToast, notifyInfo } fr
 
 import { useState } from 'react'
 
+import { useBreakpoint } from "../../hooks/useBreakpoint"
+import { SCREEN } from "../../styles/device"
+
 export function SingUp(){
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
+
+    const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
 
     const navigate = useNavigate()
 
@@ -54,6 +59,8 @@ export function SingUp(){
             </Title>
 
             <Content>
+                {isDesktop && <h2>Crie sua conta</h2>}
+
                 <div>
                     <span>Seu nome</span>
                     <Input placeholder="Exemplo: Maria Silva" type="text" onChange={(e) => setName(e.target.value)} />
