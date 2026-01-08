@@ -7,6 +7,7 @@ const AuthContext = createContext({})
 const SESSION_DURATION = 7 * 24 * 60 * 60 * 1000 // 7 dias em ms
 
 import { notifySuccess, notifyError, notifyLoading, updateToast } from '../utils/toast'
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 function AuthProvider({children}){
     const [data, setData] = useState({})
@@ -16,6 +17,8 @@ function AuthProvider({children}){
         try {
             const response = await api.post("/sessions", {email, password})
             const { user } = response.data
+
+            await delay(500)
 
             const sessionData = {
                 user,

@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Home } from '../pages/Home'
 import { NewDish } from '../pages/NewDish'
 import { EditDish } from '../pages/EditDish'
+import { Details } from '../pages/Details'
 
 import { useAuth } from '../hooks/auth'
 
@@ -12,6 +13,7 @@ export function AppRoutes(){
     return(
         <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/details/:id' element={<Details />} />
             
             {user.isAdmin == true && (<Route path='/newDish' element={<NewDish />} />)}
             {user.isAdmin == true && (<Route path='/editDish/:id' element={<EditDish />} />)}

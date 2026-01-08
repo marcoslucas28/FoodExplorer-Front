@@ -38,7 +38,7 @@ export function Card({ data, goToDetails, handleAdd, handleRemove, includeItem, 
         <div>
           <div>
               <FaMinus className="icon2" onClick={handleRemove} />
-              <span>{quantity}</span>
+              <span>0{quantity}</span>
               <FaPlus className="icon2" onClick={handleAdd} />
           </div>
           <Button onClick={includeItem} title="incluir" />

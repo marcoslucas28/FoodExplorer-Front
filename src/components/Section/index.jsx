@@ -32,6 +32,14 @@ export function Section({ title, dishes, category, handleToggleFavorite, ...rest
     }
   }, [])
 
+  useEffect(() => {
+    const initialQuantities = {}
+    dishes.forEach(dish => {
+      initialQuantities[dish.id] = 1
+    })
+    setQuantities(initialQuantities)
+  }, [dishes])
+
   function handleAdd(dishId) {
     setQuantities(prev => ({
       ...prev,
@@ -42,7 +50,7 @@ export function Section({ title, dishes, category, handleToggleFavorite, ...rest
   function handleRemove(dishId) {
     setQuantities(prev => ({
       ...prev,
-      [dishId]: Math.max((prev[dishId] || 0) - 1, 0)
+      [dishId]: Math.max((prev[dishId] || 0) - 1, 1)
     }))
   }
 
@@ -81,7 +89,7 @@ export function Section({ title, dishes, category, handleToggleFavorite, ...rest
             handleAdd={() => handleAdd(dish.id)} 
             handleRemove={() => handleRemove(dish.id)} 
             includeItem={() => includeItem(dish.id)} 
-            quantity={quantities[dish.id] || 0}
+            quantity={quantities[dish.id] || 1}
             handleToggleFavorite={() => handleToggleFavorite(dish.id, category)}
           />
         </SwiperSlide>

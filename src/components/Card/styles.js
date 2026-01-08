@@ -20,7 +20,7 @@ export const Container = styled.div`
     }
 
     p {
-        font-size: 1.6rem;
+        font-size: 2rem;
         color: ${({ theme }) => theme.COLORS.CAKE_200};
         font-family: 'Roboto', sans-serif;
     }
@@ -34,7 +34,7 @@ export const Container = styled.div`
     }
 
     > img {
-        width: 10rem;
+        width: 15rem;
     }
 
     > div {
@@ -48,14 +48,14 @@ export const Container = styled.div`
         > div {
             display: flex;
             align-items: center;
-            gap: 1.4rem;
+            gap: 2rem;
             color: ${({ theme }) => theme.COLORS.LIGHT_300};
-            font-size: 1.6rem;
+            font-size: 2rem;
             font-family: 'Roboto', sans-serif;
 
             .icon2 {
                 cursor: pointer;
-                font-size: 1.4rem;
+                font-size: 1.6rem;
                 color: ${({ theme }) => theme.COLORS.LIGHT_100};
                 font-weight: 100;
             }
