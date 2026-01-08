@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { DEVICE } from '../../styles/device';
+
 export const Container = styled.header`
     background-color: ${({theme}) => theme.COLORS.DARK_700};
     padding: 2rem;
@@ -9,6 +11,27 @@ export const Container = styled.header`
     align-items: center;
     width: 100%;
     grid-area: header;
+
+    .logout {
+        color: ${({theme}) => theme.COLORS.LIGHT_100};
+        font-size: 10rem;
+        cursor: pointer;
+
+        ${DEVICE.lg} {
+            font-size: 3.5rem;
+        }
+    }
+
+    ${DEVICE.md} {
+        justify-content: center;
+        gap: 3.2rem;
+
+        input {
+            width: 100%;
+            margin: 0 auto;
+        }
+    }
+    
 `
 
 export const Title = styled.div`
@@ -16,6 +39,19 @@ export const Title = styled.div`
     gap: 8px;
     align-items: center;
     text-align: center;
+    max-width: 18rem;
+    width: 100%;
+
+    ${DEVICE.md} {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
     img {
         width: 2.5rem;
@@ -30,6 +66,12 @@ export const Title = styled.div`
     span {
         color: ${({theme}) => theme.COLORS.CAKE_200};
         font-size: 1.6rem;
+
+        ${DEVICE.md} {
+            font-size: 1.4rem;
+            align-self: flex-end;
+            font-weight: 300;
+        }
     }
 `
 
@@ -70,3 +112,29 @@ export const Orders = styled.button`
         font-weight: 500;
     }
 `
+
+export const NewButton = styled.button`
+    background-color: ${({theme}) => theme.COLORS.TOMATO_100};
+    color: ${({theme}) => theme.COLORS.LIGHT_100};
+    border: none;
+    width: 100%;
+    max-width: 20rem;
+    font-size: 1.6rem;
+    padding: 1.2rem 0;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-sizing: content-box;
+    border-radius: 5px;
+    height: 30px;
+    gap: 7px;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    img {
+        width: 2rem;
+    }
+`;

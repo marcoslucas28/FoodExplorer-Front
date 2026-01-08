@@ -23,6 +23,22 @@ export const Container = styled.section`
     padding-bottom: 50px; 
   }
 
+  .empty_state {
+    padding: 2rem;
+    text-align: center;
+
+    svg {
+      font-size: 3rem;
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    }
+
+    p {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    }
+  }
+
   swiper-pagination {
     bottom: 0;
     padding-bottom: 10px;  

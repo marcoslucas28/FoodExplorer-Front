@@ -79,7 +79,7 @@ export function Home(){
     return(
         <Container>
             <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} onSearchDishes={handleSearchDishes} />
-            <Header isMenuVisible={isMenuVisible} onMenuClick={toggleMenu} />
+            <Header isMenuVisible={isMenuVisible} onMenuClick={toggleMenu} onSearchDishes={handleSearchDishes} />
             <Content>
                 <HeroSection>
                     <div className="banner-wrapper">

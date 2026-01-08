@@ -14,6 +14,8 @@ import { Card } from '../Card';
 
 import { api } from '../../services/api';
 
+import { FiSearch } from 'react-icons/fi';
+
 export function Section({ title, dishes, category, handleToggleFavorite, ...rest }) {
   const [showNavigation, setShowNavigation] = useState(window.innerWidth > 767)
   const navigate = useNavigate()
@@ -74,26 +76,33 @@ export function Section({ title, dishes, category, handleToggleFavorite, ...rest
   return <Container {...rest}>
     <h2>{title}</h2>
 
-    <Swiper
-      modules={[Navigation, Pagination]}
-      navigation={showNavigation}
-      pagination={{clickable: true}}
-      spaceBetween={10}
-      slidesPerView={1}
-    >
-      {dishes.map(dish => (
-        <SwiperSlide key={dish.id} >
-          <Card 
-            data={dish} 
-            goToDetails={() => navigate(`/details/${dish.id}`)} 
-            handleAdd={() => handleAdd(dish.id)} 
-            handleRemove={() => handleRemove(dish.id)} 
-            includeItem={() => includeItem(dish.id)} 
-            quantity={quantities[dish.id] || 1}
-            handleToggleFavorite={() => handleToggleFavorite(dish.id, category)}
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    {dishes.length === 0 ? (
+      <div className='empty_state'>
+        <FiSearch />
+        <p>Nenhum prato encontrado nesta categoria.</p>
+      </div>
+    ) : (
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation={showNavigation}
+        pagination={{clickable: true}}
+        spaceBetween={10}
+        slidesPerView={1}
+      >
+        {dishes.map(dish => (
+          <SwiperSlide key={dish.id} >
+            <Card 
+              data={dish} 
+              goToDetails={() => navigate(`/details/${dish.id}`)} 
+              handleAdd={() => handleAdd(dish.id)} 
+              handleRemove={() => handleRemove(dish.id)} 
+              includeItem={() => includeItem(dish.id)} 
+              quantity={quantities[dish.id] || 1}
+              handleToggleFavorite={() => handleToggleFavorite(dish.id, category)}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    )}
   </Container>;
 }
