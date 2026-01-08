@@ -11,10 +11,15 @@ import icon from '../../assets/Polygon 1.svg'
 
 import { Link } from 'react-router-dom'
 
+import { useBreakpoint } from "../../hooks/useBreakpoint"
+import { SCREEN } from "../../styles/device"
+
 export function SingIn(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
+
+    const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
 
     const { singIn } = useAuth()
 
@@ -31,6 +36,7 @@ export function SingIn(){
             </Title>
 
             <Content>
+                {isDesktop && <h2>Faça Login</h2>}
                 <div>
                     <span>Email</span>
                     <Input placeholder="Exemplo: exemplo@email.com" type="text" onChange={(e) => setEmail(e.target.value)} />
