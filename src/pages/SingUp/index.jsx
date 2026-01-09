@@ -13,7 +13,7 @@ import { api } from '../../services/api'
 
 import { notifySuccess, notifyError, notifyLoading, updateToast, notifyInfo } from '../../utils/toast'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import { useBreakpoint } from "../../hooks/useBreakpoint"
 import { SCREEN } from "../../styles/device"
@@ -51,6 +51,8 @@ export function SingUp(){
         }).finally(() => setLoading(false))
     }
 
+    
+
     return(
         <Container>
             <Title>
@@ -73,7 +75,7 @@ export function SingUp(){
 
                 <div>
                     <span>Senha</span>
-                    <Input placeholder="No mínimo 6 caracteres" type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <Input placeholder="No mínimo 6 caracteres" type="password" onChange={(e) => setPassword(e.target.value)}  />
                 </div>
 
                 <Button title="Criar conta" disabled={loading} onClick={handleSingUp} />

@@ -23,13 +23,14 @@ export const Content = styled.main`
   gap: 3.2rem;
   overflow: hidden;
   width: 100%;
-  padding: 2rem;
+  padding: 2rem 0;
 `
 
 
 export const HeroSection = styled.section`
    width: 100%;
    margin-bottom: 6.2rem;
+   padding: 0 2rem;
 
   .banner-wrapper {
     ${DEVICE.lg} {

@@ -85,9 +85,27 @@ export function Section({ title, dishes, category, handleToggleFavorite, ...rest
       <Swiper
         modules={[Navigation, Pagination]}
         navigation={showNavigation}
-        pagination={{clickable: true}}
-        spaceBetween={10}
-        slidesPerView={1}
+        pagination={{ clickable: true }}
+        centeredSlides={true}
+        centeredSlidesBounds={true}
+        spaceBetween={20}
+        breakpoints={{
+          0: {
+            slidesPerView: 1.3,
+            centeredSlides: false,
+            initialSlide: 0,
+          },
+          425: {
+            slidesPerView: 1.5,
+            centeredSlides: false,
+            initialSlide: 0,
+          },
+          768: {
+            slidesPerView: 2.2,
+            centeredSlides: true,
+            initialSlide: Math.floor(dishes.length / 2),
+          },
+        }}
       >
         {dishes.map(dish => (
           <SwiperSlide key={dish.id} >

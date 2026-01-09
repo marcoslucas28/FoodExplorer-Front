@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { DEVICE } from '../../styles/device'
+
 export const Container = styled.footer`
     width: 100%;
     height: 10vh;
@@ -24,12 +26,20 @@ export const Title = styled.div`
 
     img {
         width: 2.2rem;
+
+        ${DEVICE.md}{
+            width: 3rem;
+        }
     }
 
     h1 {
         font-size: 1.526rem;
         color: ${({theme}) => theme.COLORS.LIGHT_700};
         font-family: 'Roboto';
+
+        ${DEVICE.md}{
+            font-size: 2rem;
+        }
     }
 `
 

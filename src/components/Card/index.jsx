@@ -14,8 +14,13 @@ import { useAuth } from "../../hooks/auth";
 
 import { useNavigate } from "react-router-dom";
 
+import { useBreakpoint } from '../../hooks/useBreakpoint'
+import { SCREEN } from '../../styles/device'
+
 export function Card({ data, goToDetails, handleAdd, handleRemove, includeItem, quantity, handleToggleFavorite, ...rest }) {
   const { image, name, description, price, id, isFavorite } = data;
+
+  const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
 
   const { user } = useAuth();
 
@@ -31,6 +36,9 @@ export function Card({ data, goToDetails, handleAdd, handleRemove, includeItem, 
     }
     <img onClick={goToDetails} src={imageURL} alt={name} />
       <h3 onClick={goToDetails}>{name} &gt; </h3>
+      {
+        isDesktop && <p onClick={goToDetails} className="description">{description}</p>
+      }
       <p>R$ {price}</p>
 
       {
