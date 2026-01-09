@@ -23,7 +23,7 @@ export function Header({onMenuClick, onSearchDishes}){
     const { user, SingOut } = useAuth()
     const { pendingOrdersCount } = useOrders()
 
-    const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.md})`);
+    const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
 
     const isAdmin = !!user.isAdmin;
 
@@ -43,6 +43,12 @@ export function Header({onMenuClick, onSearchDishes}){
 
             {isAdmin && <span>admin</span>}
             </Title>
+
+            {
+                !isDesktop && isAdmin && (
+                    <div></div>
+                )
+            }
 
             {isDesktop && (
             <Input

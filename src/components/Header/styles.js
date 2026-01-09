@@ -22,7 +22,7 @@ export const Container = styled.header`
         }
     }
 
-    ${DEVICE.md} {
+    ${DEVICE.lg} {
         justify-content: center;
         gap: 3.2rem;
 
@@ -39,10 +39,10 @@ export const Title = styled.div`
     gap: 8px;
     align-items: center;
     text-align: center;
-    max-width: 18rem;
-    width: 100%;
+    max-width: 25rem;
+    width: auto;
 
-    ${DEVICE.md} {
+    ${DEVICE.lg} {
         flex-direction: column;
         gap: 0;
     }

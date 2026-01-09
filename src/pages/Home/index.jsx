@@ -9,8 +9,13 @@ import { useState, useEffect } from 'react'
 
 import { api } from '../../services/api'
 
+import { useBreakpoint } from '../../hooks/useBreakpoint'
+import { SCREEN } from '../../styles/device'
+
 export function Home(){
     const [isMenuVisible, setIsMenuVisible] = useState(false)
+
+    const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
 
     const [mealsDishes, setMealsDishes] = useState([])
     const [dessertsDishes, setDessertsDishes] = useState([])
@@ -78,7 +83,7 @@ export function Home(){
 
     return(
         <Container>
-            <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} onSearchDishes={handleSearchDishes} />
+            {!isDesktop && <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} onSearchDishes={handleSearchDishes} />}
             <Header isMenuVisible={isMenuVisible} onMenuClick={toggleMenu} onSearchDishes={handleSearchDishes} />
             <Content>
                 <HeroSection>

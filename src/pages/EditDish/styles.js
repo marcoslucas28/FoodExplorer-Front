@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { DEVICE } from '../../styles/device'
+
 export const Container = styled.div`
     height: 100vh;
     width: 100%;
@@ -18,6 +20,7 @@ export const Content = styled.main`
 
     h1 {
         margin: 2.4rem 0;
+        font-weight: 300;
     }
 `
 
@@ -37,6 +40,37 @@ export const Form = styled.form`
             margin-bottom: 1.6rem;
         }
     }
+
+    ${DEVICE.lg}{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3.6rem;
+    
+            .item-1,
+            .item-2,
+            .item-3 {
+            
+            }
+    
+            .item-4 {
+                grid-column: span 2;
+            }
+    
+            .item-5 {
+                grid-column: span 1;
+            }
+    
+            .item-6 {
+                grid-column: span 3;
+            }
+    
+            .item-7 {
+                grid-column: 2 / 4;
+                justify-self: end;
+                flex-direction: row-reverse;
+            }
+    
+        }
 `
 
 
@@ -86,16 +120,21 @@ export const InputOption = styled.select`
     }
 `
 export const Ingredients = styled.div`
-    width: 100%;
     padding: 8px 4px;
     background-color: ${({theme}) => theme.COLORS.DARK_800}; 
     display: flex;
-    gap: 1.6rem;
+    gap: 1.2rem;
     flex-wrap: wrap;
     border-radius: 8px;
+
+    ${DEVICE.lg}{
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+    }
 `
 
 export const ButtonsContent = styled.div`
     display: flex;
+    width: 100%;
     gap: 3.2rem;
 `

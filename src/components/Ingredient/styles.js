@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { DEVICE } from '../../styles/device'
+
 export const Container = styled.div`
     background-color: ${({theme, $isnew}) => $isnew ? "transparent" : theme.COLORS.LIGHT_600};
     color: ${({theme, $isnew}) => $isnew ? theme.COLORS.LIGHT_500 : theme.COLORS.LIGHT_100};
@@ -14,7 +16,6 @@ export const Container = styled.div`
     justify-content: center;
 
     border-radius: 8px;
-    width: auto;
 
     flex: 0 1 10px;
 
@@ -36,6 +37,8 @@ export const Container = styled.div`
         font-size: 1.6rem;
         height: 1.5rem;
         color: ${({theme}) => theme.COLORS.LIGHT_100};
+        width: 100%;
+        max-width: 40rem;
 
         &::placeholder {
             color: ${({theme, $isnew}) => $isnew ? theme.COLORS.LIGHT_500 : theme.COLORS.LIGHT_100};

@@ -19,10 +19,15 @@ import { api } from '../../services/api'
 
 import { notifyError, notifySuccess, notifyInfo, confirmToast } from '../../utils/toast'
 
+import { useBreakpoint } from '../../hooks/useBreakpoint'
+import { SCREEN } from '../../styles/device'
+
 export function EditDish(){
     const navigate = useNavigate()
     const params = useParams()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
+
+    const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
 
     const [loading, setLoading] = useState(false)
     const [name, setName] = useState("")
@@ -130,28 +135,28 @@ export function EditDish(){
 
     return(
         <Container>
-            <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} />
+            {!isDesktop && <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)}  />}
             <Header onMenuClick={toggleMenu} />
 
             <Content>
-                <ButtonText onClick={handleBack} isBigSize={false} title="Voltar" icon={MdKeyboardArrowLeft} />
+                {isDesktop ? <ButtonText onClick={handleBack} isBigSize={true} title="voltar" icon={MdKeyboardArrowLeft} /> : <ButtonText onClick={handleBack} isBigSize={false} title="voltar" icon={MdKeyboardArrowLeft} />}
 
                 <h1>Editar prato</h1>
 
                 <Form>
-                    <div>
+                    <div className='item-1'>
                         <span>Imagem do prato</span>
 
                         <FileInput placeholder="Selecione imagem para alterá-la" onChange={(e) => setImage(e.target.files[0])} />
                     </div>
 
-                    <div>
+                    <div className='item-2'>
                         <span>Nome</span>
 
                         <InputText placeholder="Ex.: Salada Ceasar" onChange={(e) => setName(e.target.value)} value={name} />
                     </div>
 
-                    <div>
+                    <div className='item-3'>
                         <span>Categoria</span>
 
                         <InputOption onChange={(e) => setCategory(e.target.value)} value={category}>
@@ -161,7 +166,7 @@ export function EditDish(){
                         </InputOption>
                     </div>
 
-                    <div>
+                    <div className='item-4'>
                         <span>Ingredientes</span>
 
                         <Ingredients>
@@ -182,19 +187,19 @@ export function EditDish(){
                         </Ingredients>
                     </div>
 
-                    <div>
+                    <div className='item-5'>
                         <span>Preço</span>
 
                         <InputText value={price} onChange={(e) => setPrice(e.target.value)}  type="number" step="0,01" placeholder="R$ 00,00" />
                     </div>
 
-                    <div>
+                    <div className='item-6'>
                         <span>Descrição</span>
 
                         <TextArea onChange={(e) => setDescription(e.target.value)} value={description} placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
                     </div>
 
-                    <ButtonsContent>
+                    <ButtonsContent className='item-7'>
                         <Button onClick={handleEditDish} type="button" disabled={loading} title="Salvar alterações" />
                         <Button onClick={handleRemoveDish} isDelete={true} type="button" disabled={loading} title="Excluir prato" />
                     </ButtonsContent>

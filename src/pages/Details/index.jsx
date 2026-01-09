@@ -22,11 +22,16 @@ import orderIcon from '../../assets/order_card.svg'
 
 import { notifyInfo } from '../../utils/toast'
 
+import { useBreakpoint } from '../../hooks/useBreakpoint'
+import { SCREEN } from '../../styles/device'
+
 export function Details() {
     const navigate = useNavigate()
     const params = useParams()
 
     const { user } = useAuth()
+
+    const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
 
     const [isMenuVisible, setIsMenuVisible] = useState(false)
     const [quantities, setQuantities] = useState({})
@@ -98,7 +103,7 @@ export function Details() {
 
   return(
     <Container>
-      <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} />  
+       {!isDesktop && <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} onSearchDishes={handleSearchDishes} />}
       <Header onMenuClick={toggleMenu} />
       <Content>
         <ButtonText style={{
