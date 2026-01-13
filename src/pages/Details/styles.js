@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { DEVICE } from '../../styles/device'
+
 export const Container = styled.div`
     width: 100%;
     height: 100vh;
@@ -26,8 +28,17 @@ export const Content = styled.main`
     gap: 1.6rem;
     margin: 0 auto;
 
+    ${DEVICE.lg}{
+        flex-direction: row;
+        gap: 5rem;
+    }
+
     img {
         width: 20rem;
+
+        ${DEVICE.lg}{
+            width: 35rem;
+        }
     }
 
 
@@ -39,16 +50,27 @@ export const DetailsContainer = styled.div`
     flex-direction: column;
     gap: 4.8rem;
 
+    .adminButton {
+        max-width: 20rem;
+    }
+
     .detailsText {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
         gap: 2.4rem;
+
+        ${DEVICE.lg}{
+            text-align: start;
+            align-items: baseline;
+        }
 
         h2 {
             font-size: 2.3rem;
             color: ${({ theme }) => theme.COLORS.LIGHT_300};
+            font-weight: 500;
         }
 
         p {
@@ -56,6 +78,10 @@ export const DetailsContainer = styled.div`
             color: ${({ theme }) => theme.COLORS.LIGHT_300};
             text-align: center;
             line-height: 2.6rem;
+
+            ${DEVICE.lg}{
+                text-align: start;
+            }
         }
 
         section {
@@ -65,6 +91,9 @@ export const DetailsContainer = styled.div`
             flex-wrap: wrap;
             max-height: 15rem;
             overflow-y: auto;
+
+            ${DEVICE.lg}{
+            }
         }
     }
 
@@ -81,18 +110,29 @@ export const DetailsContainer = styled.div`
             justify-content: center;
             gap: 1rem;
             color: ${({ theme }) => theme.COLORS.LIGHT_300};
-            font-size: 1.6rem;
-            font-weight: bold;
+            font-size: 2rem;
             font-family: 'Roboto', sans-serif;
             width: 100%;
-            max-width: 6rem;
+
+            ${DEVICE.lg}{
+                font-size: 2.4rem;
+                font-weight: 300;
+            }
 
             .icon2 {
                 cursor: pointer;
-                font-size: 1.6rem;
+                font-size: 2rem;
                 color: ${({ theme }) => theme.COLORS.LIGHT_100};
                 font-weight: 100;
+
+                ${DEVICE.lg}{
+                    font-size: 2.5rem;
+                }
             }
+        }
+
+        ${DEVICE.lg}{
+            gap: 2rem;
         }
     }
 `
@@ -127,5 +167,13 @@ export const NewButton = styled.button`
     }
     img {
         width: 2rem;
+
+        ${DEVICE.lg}{
+            display: none;
+        }
+    }
+
+    ${DEVICE.lg}{
+        max-width: 25rem;
     }
 `;

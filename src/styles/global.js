@@ -20,7 +20,7 @@ export default createGlobalStyle`
 
         box-sizing: border-box;
 
-        --scroll-track-color: #2f3538;
+        --scroll-track-color: ${({theme}) => theme.COLORS.DARK_400};
         --scroll-thumb-color:rgb(17, 37, 163);
         --scroll-size: 8px;
 

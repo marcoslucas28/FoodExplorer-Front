@@ -6,8 +6,8 @@ import { SideMenu } from '../../components/SideMenu'
 import { ButtonText } from "../../components/ButtonText";
 import { Button } from "../../components/Button";
 
-import { FaPlus } from "react-icons/fa";
-import { FaMinus } from "react-icons/fa";
+import { GoPlus } from "react-icons/go";
+import { LuMinus } from "react-icons/lu";
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 
 import { useState, useEffect } from "react";
@@ -103,7 +103,7 @@ export function Details() {
 
   return(
     <Container>
-       {!isDesktop && <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} onSearchDishes={handleSearchDishes} />}
+       {!isDesktop && <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} />}
       <Header onMenuClick={toggleMenu} />
       <Content>
         <ButtonText style={{
@@ -132,14 +132,15 @@ export function Details() {
                 <Button 
                     title="Editar prato"
                     onClick={() => navigate(`/editDish/${params.id}`)}
+                    className="adminButton"
                 />
             ) : (
 
                 <div className="addItens">
                     <div>
-                        <FaMinus className="icon2" onClick={() => handleRemove(params.id)} />
+                        <LuMinus  onClick={() => handleRemove(params.id)} className="icon2" />
                         <span>0{quantities[params.id] || 1}</span>
-                        <FaPlus className="icon2" onClick={() => handleAdd(params.id)} />
+                        <GoPlus onClick={() => handleAdd(params.id)} className="icon2" />
                     </div>
                     <NewButton onClick={() => includeItem(params.id)} >
                         <img src={orderIcon} alt="Ícone de pedido" />
