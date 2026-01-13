@@ -4,6 +4,8 @@ import { Home } from '../pages/Home'
 import { NewDish } from '../pages/NewDish'
 import { EditDish } from '../pages/EditDish'
 import { Details } from '../pages/Details'
+import { Payment } from '../pages/Payment'
+import { OrderHistory } from '../pages/OrderHistory'
 
 import { useAuth } from '../hooks/auth'
 
@@ -14,6 +16,9 @@ export function AppRoutes(){
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/details/:id' element={<Details />} />
+
+            {!user.isAdmin && (<Route path='/myOrder' element={<Payment />} />)}
+            {!user.isAdmin && (<Route path='/orderHistory' element={<OrderHistory />} />)}
             
             {user.isAdmin == true && (<Route path='/newDish' element={<NewDish />} />)}
             {user.isAdmin == true && (<Route path='/editDish/:id' element={<EditDish />} />)}

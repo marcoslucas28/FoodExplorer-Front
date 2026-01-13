@@ -16,9 +16,13 @@ import { api } from '../../services/api';
 
 import { FiSearch } from 'react-icons/fi';
 
+import { useOrders } from '../../hooks/orders'
+
 export function Section({ title, dishes, category, handleToggleFavorite, ...rest }) {
   const [showNavigation, setShowNavigation] = useState(window.innerWidth > 767)
   const navigate = useNavigate()
+
+  const { fetchOrderCount } = useOrders()
 
   const [quantities, setQuantities] = useState({})
 
@@ -63,6 +67,8 @@ export function Section({ title, dishes, category, handleToggleFavorite, ...rest
         dish_id: dishId,
         quantity
       });
+
+      fetchOrderCount()
 
       setQuantities(prev => ({
         ...prev,

@@ -9,32 +9,30 @@ function OrdersProvider({children}){
     const [pendingOrdersCount, setPendingOrdersCount] = useState(0)
     const { user } = useAuth()
 
+    const fetchOrderCount = async () => {
+        try {
+            const response = await api.get('/orders/pending')
+            const items = response.data.items || []
+            setPendingOrdersCount(items.length)
+        } catch (error) {
+            console.error('Erro ao buscar pedidos pendentes:', error)
+            setPendingOrdersCount(0)
+        }
+    }
+
     useEffect(() => {
         if (!user || user.isAdmin) {
             setPendingOrdersCount(0)
             return
         }
 
-        const fetchOrderCount = async () => {
-            try {
-                const response = await api.get('/orders/pending')
-                const items = response.data.items || []
-                setPendingOrdersCount(items.length)
-            } catch (error) {
-                console.error('Erro ao buscar pedidos pendentes:', error)
-                setPendingOrdersCount(0)
-            }
-        }
 
         fetchOrderCount()
-
-        const interval = setInterval(fetchOrderCount, 5000) // Atualiza a cada 5 segundos
-
-        return () => clearInterval(interval)
+        return;
     }, [user])
 
     return (
-        <OrdersContext.Provider value={{ pendingOrdersCount }}>
+        <OrdersContext.Provider value={{ pendingOrdersCount, fetchOrderCount }}>
             {children}
         </OrdersContext.Provider>
     )

@@ -35,7 +35,7 @@ export function Header({onMenuClick, onSearchDishes}){
             </Menu>
             )}
 
-            <Title>
+            <Title onClick={() => navigate("/")}>
             <div>
                 <img src={logoIcon} alt="Ícone do foodexplorer" />
                 <h1>food explorer</h1>
@@ -60,7 +60,7 @@ export function Header({onMenuClick, onSearchDishes}){
             )}
 
             {!isAdmin && !isDesktop && (
-            <Orders>
+            <Orders onClick={() => navigate("/myOrder")}>
                 <img src={order_card} alt="icone de pedidos" />
                 <span>{pendingOrdersCount}</span>
             </Orders>
@@ -75,7 +75,7 @@ export function Header({onMenuClick, onSearchDishes}){
             )}
 
             {!isAdmin && isDesktop && (
-            <NewButton to="/newDish">
+            <NewButton onClick={() => navigate("/myOrder")}>
                 <img src={order_card} alt="icone de pedidos" />
                 Meu pedido ({pendingOrdersCount})
             </NewButton>
