@@ -50,6 +50,14 @@ export function SideMenu({isVisible = false, onCloseMenu, onSearchDishes}){
                         <Opition onClick={() => navigate("/newDish")} title="Novo Prato" />
                     )
                     }
+                    {
+                        !user.isAdmin && (
+                            <>
+                                <Opition onClick={() => navigate("/orderHistory")} title="Histórico de pedidos" />
+                                <Opition onClick={() => navigate("/orderHistory")} title="Meus favoritos" />
+                            </>
+                        )
+                    }
                     <Opition onClick={SingOut} title="Sair" />
                 </List>
             </Content>

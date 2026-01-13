@@ -12,6 +12,7 @@ import { useOrders } from '../../hooks/orders'
 
 import { Input } from '../Input'
 import { Button } from '../Button'
+import { ButtonText } from '../ButtonText'
 
 import { useBreakpoint } from '../../hooks/useBreakpoint'
 import { SCREEN } from '../../styles/device'
@@ -24,6 +25,7 @@ export function Header({onMenuClick, onSearchDishes}){
     const { pendingOrdersCount } = useOrders()
 
     const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
+    const isBigDesktop = !!useBreakpoint(`(min-width: ${SCREEN.xl})`);
 
     const isAdmin = !!user.isAdmin;
 
@@ -44,12 +46,6 @@ export function Header({onMenuClick, onSearchDishes}){
             {isAdmin && <span>admin</span>}
             </Title>
 
-            {
-                !isDesktop && isAdmin && (
-                    <div></div>
-                )
-            }
-
             {isDesktop && (
             <Input
             style={{maxWidth: '40rem'}}
@@ -59,7 +55,18 @@ export function Header({onMenuClick, onSearchDishes}){
             />
             )}
 
-            {!isAdmin && !isDesktop && (
+            {
+                !isAdmin  && isDesktop && (
+                    <ButtonText title="Favoritos" isBigSize={false} />
+                )
+            }
+            {
+                !isAdmin  && isDesktop && (
+                    <ButtonText onClick={() => navigate("/orderHistory")} title="Histórico de pedidos" isBigSize={false} />
+                )
+            }
+
+            {!isBigDesktop && (
             <Orders onClick={() => navigate("/myOrder")}>
                 <img src={order_card} alt="icone de pedidos" />
                 <span>{pendingOrdersCount}</span>
@@ -74,7 +81,7 @@ export function Header({onMenuClick, onSearchDishes}){
             />
             )}
 
-            {!isAdmin && isDesktop && (
+            {isBigDesktop && (
             <NewButton onClick={() => navigate("/myOrder")}>
                 <img src={order_card} alt="icone de pedidos" />
                 Meu pedido ({pendingOrdersCount})

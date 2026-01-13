@@ -46,6 +46,7 @@ function AuthProvider({children}){
 
     function SingOut(){
         handleLogout()
+        window.location.href = "/"
     }
 
     useEffect(() => {

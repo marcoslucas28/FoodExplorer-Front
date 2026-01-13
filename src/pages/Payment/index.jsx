@@ -4,6 +4,11 @@ import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Button } from '../../components/Button'
 
+import { SideMenu } from '../../components/SideMenu'
+
+import { useBreakpoint } from '../../hooks/useBreakpoint'
+import { SCREEN } from '../../styles/device'
+
 import { api } from '../../services/api'
 
 import { useState, useEffect } from 'react'
@@ -18,7 +23,15 @@ export function Payment(){
     const [totalPrice, setTotalPrice] = useState(0)
     const [items, setItems] = useState([])
 
+    const [isMenuVisible, setIsMenuVisible] = useState(false)
+    
+    const isDesktop = !!useBreakpoint(`(min-width: ${SCREEN.lg})`);
+
     const { fetchOrderCount } = useOrders()
+
+    function toggleMenu(){
+        setIsMenuVisible(!isMenuVisible)
+    }
 
     async function deleteOrder(id, price){
         try {
@@ -68,7 +81,8 @@ export function Payment(){
 
     return(
         <Container>
-            <Header />
+            {!isDesktop && <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} />}
+            <Header isMenuVisible={isMenuVisible} onMenuClick={toggleMenu} />
             <Content>
                 <Orders>
                     <h2>Meu pedido</h2>
