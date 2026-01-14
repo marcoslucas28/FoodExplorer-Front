@@ -14,9 +14,12 @@ import { useState, useEffect } from 'react'
 
 import { api } from '../../services/api'
 
+import { useAuth } from '../../hooks/auth'
+
 import img from '../../assets/empty-box.png'
 
 export function OrderHistory(){
+    const { user } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
     const [orders, setOrders] = useState([])
 
@@ -61,7 +64,7 @@ export function OrderHistory(){
             {!isDesktop && <SideMenu isVisible={isMenuVisible} onCloseMenu={() => setIsMenuVisible(false)} />}
             <Header isMenuVisible={isMenuVisible} onMenuClick={toggleMenu} />
             <Content>
-                <h2>Histórico de pedidos</h2>
+                <h2>{!user.isAdmin ? ("Histórico de pedidos") : ("Pedidos")}</h2>
 
                 { orders.length === 0 ? (
                         <EmptyState>

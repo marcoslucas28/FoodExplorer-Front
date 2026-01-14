@@ -14,7 +14,7 @@ export const Container = styled.div`
 export const Content = styled.main`
     padding: 5rem 0;
     width: 90%;
-    max-width: 40rem;
+    max-width: 45rem;
     grid-area: content;
     display: flex;
     flex-direction: column;

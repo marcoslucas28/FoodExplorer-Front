@@ -47,13 +47,16 @@ export function SideMenu({isVisible = false, onCloseMenu, onSearchDishes}){
                 <List>
                     {
                         user.isAdmin == true && (
-                        <Opition onClick={() => navigate("/newDish")} title="Novo Prato" />
+                        <>
+                            <Opition onClick={() => navigate("/newDish")} title="Novo Prato" />
+                            <Opition onClick={() => navigate("/orders")} title="Pedidos" />
+                        </>
                     )
                     }
                     {
                         !user.isAdmin && (
                             <>
-                                <Opition onClick={() => navigate("/orderHistory")} title="Histórico de pedidos" />
+                                <Opition onClick={() => navigate("/orders")} title="Histórico de pedidos" />
                                 <Opition onClick={() => navigate("/orderHistory")} title="Meus favoritos" />
                             </>
                         )

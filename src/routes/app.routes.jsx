@@ -16,9 +16,9 @@ export function AppRoutes(){
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/details/:id' element={<Details />} />
+            <Route path='/orders' element={<OrderHistory />} />
 
             {!user.isAdmin && (<Route path='/myOrder' element={<Payment />} />)}
-            {!user.isAdmin && (<Route path='/orderHistory' element={<OrderHistory />} />)}
             
             {user.isAdmin == true && (<Route path='/newDish' element={<NewDish />} />)}
             {user.isAdmin == true && (<Route path='/editDish/:id' element={<EditDish />} />)}
