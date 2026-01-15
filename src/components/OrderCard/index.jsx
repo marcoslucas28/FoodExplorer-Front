@@ -18,9 +18,9 @@ export function OrderCard({data}){
     const { user } = useAuth()
 
     const STATUS_COLORS = {
-        pending: "TOMATO_300",     // amarelo
-        preparing: "CARROT_100",   // azul
-        delivered: "MINT_100"    // verde
+        pending: "TOMATO_300",
+        preparing: "CARROT_100", 
+        delivered: "MINT_100" 
     };
 
 

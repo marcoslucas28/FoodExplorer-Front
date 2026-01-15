@@ -8,6 +8,8 @@ import GlobalStyles from './styles/global.js'
 import { AuthProvider } from './hooks/auth.jsx'
 import { OrdersProvider } from './hooks/orders.jsx'
 
+import { SoundUnlock } from './components/SoundUnlock'
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,11 +19,14 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <AuthProvider>
-        <OrdersProvider>
-          <Routes />
-        </OrdersProvider>
-      </AuthProvider>
+
+      <SoundUnlock>
+        <AuthProvider>
+          <OrdersProvider>
+            <Routes />
+          </OrdersProvider>
+        </AuthProvider>
+      </SoundUnlock>
 
       <ToastContainer
         position="top-right"

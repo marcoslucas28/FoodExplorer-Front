@@ -1,6 +1,7 @@
 import { Container, Content, EmptyState } from "./styles"
 
 import { useMemo } from 'react'
+import { socket } from "../../services/socket";
 
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
@@ -16,6 +17,8 @@ import { api } from '../../services/api'
 
 import { useAuth } from '../../hooks/auth'
 
+import { notifyInfo } from "../../utils/toast"
+
 import img from '../../assets/empty-box.png'
 
 export function OrderHistory(){
@@ -30,15 +33,42 @@ export function OrderHistory(){
     }
 
     useEffect(() => {
-        async function fetchOrders(){
-             const response = await api.get("/orders") 
-             const data = await response.data 
-             setOrders(data) 
+        if (!user) return
+
+        async function fetchOrders() {
+            const response = await api.get("/orders")
+            setOrders(response.data)
         }
 
         fetchOrders()
-        
-    }, [])
+
+        if (!socket.connected) {
+            socket.connect()
+        }
+        const handleNewOrder = () => {
+            fetchOrders()
+        }
+
+        const handleStatusUpdate = () => {
+            fetchOrders()
+        }
+
+        if (user.isAdmin) {
+            socket.emit("join_admin")
+
+
+            socket.on("new_order", handleNewOrder)
+        } else {
+            socket.emit("join_user", user.id)
+
+            socket.on("order_status_updated", handleStatusUpdate)
+        }
+
+        return () => {
+            socket.off("new_order", handleNewOrder)
+            socket.off("order_status_updated", handleStatusUpdate)
+        }
+    }, [user])
 
     const STATUS_PRIORITY = {
         pending: 1,

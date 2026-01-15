@@ -29,6 +29,14 @@ export function Header({onMenuClick, onSearchDishes}){
 
     const isAdmin = !!user.isAdmin;
 
+    function goToOrdersPage(){
+        if(user.isAdmin){
+            navigate("/orders")
+        }else {
+            navigate("/myOrder")
+        }
+    }
+
     return(
         <Container>
             {!isDesktop && (
@@ -62,12 +70,12 @@ export function Header({onMenuClick, onSearchDishes}){
             }
             {
                 !isAdmin  && isDesktop && (
-                    <ButtonText onClick={() => navigate("/orderHistory")} title="Histórico de pedidos" isBigSize={false} />
+                    <ButtonText onClick={() => navigate("/orders")} title="Histórico de pedidos" isBigSize={false} />
                 )
             }
 
             {!isBigDesktop && (
-            <Orders onClick={() => navigate("/myOrder")}>
+            <Orders onClick={goToOrdersPage}>
                 <img src={order_card} alt="icone de pedidos" />
                 <span>{pendingOrdersCount}</span>
             </Orders>
@@ -82,9 +90,9 @@ export function Header({onMenuClick, onSearchDishes}){
             )}
 
             {isBigDesktop && (
-            <NewButton onClick={() => navigate("/myOrder")}>
+            <NewButton onClick={goToOrdersPage}>
                 <img src={order_card} alt="icone de pedidos" />
-                Meu pedido ({pendingOrdersCount})
+                Pedidos ({pendingOrdersCount})
             </NewButton>
             )}
 

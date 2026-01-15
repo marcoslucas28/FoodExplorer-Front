@@ -2,6 +2,11 @@ import { useContext, createContext, useState, useEffect } from 'react'
 
 import { api } from '../services/api'
 import { useAuth } from './auth'
+import { socket } from "../services/socket";
+
+import { notifyInfo } from "../utils/toast"
+
+import { playSound } from '../services/sound'
 
 const OrdersContext = createContext({})
 
@@ -11,9 +16,17 @@ function OrdersProvider({children}){
 
     const fetchOrderCount = async () => {
         try {
-            const response = await api.get('/orders/pending')
-            const items = response.data.items || []
-            setPendingOrdersCount(items.length)
+            if(!user.isAdmin){
+                const response = await api.get('/orders/pending')
+                const items = response.data.items || []
+                setPendingOrdersCount(items.length)
+            }else {
+                const response = await api.get('/orders')
+                let items = response.data || []
+                const newItems = items.filter(item => item.status === 'pending')
+                items = newItems
+                setPendingOrdersCount(items.length)
+            }
         } catch (error) {
             console.error('Erro ao buscar pedidos pendentes:', error)
             setPendingOrdersCount(0)
@@ -21,14 +34,44 @@ function OrdersProvider({children}){
     }
 
     useEffect(() => {
-        if (!user || user.isAdmin) {
+        if (!user) {
             setPendingOrdersCount(0)
             return
         }
 
+        const handleNewOrder = () => {
+           notifyInfo("Um novo pedido foi feito")
+           playSound()
+           fetchOrderCount()
+       }
 
-        fetchOrderCount()
-        return;
+       const handleStatusUpdate = () => {
+           notifyInfo("Um de seus pedidos teve uma nova atualização.")
+           playSound()
+           fetchOrderCount()
+       }
+        if (user.isAdmin) {
+            socket.connect()
+            socket.emit("join_admin")
+
+
+            socket.on("new_order", handleNewOrder)
+
+            fetchOrderCount()
+        } else {
+            socket.connect()
+            socket.emit("join_user", user.id)
+
+
+            socket.on("order_status_updated", handleStatusUpdate)
+
+            fetchOrderCount()
+        }
+
+        return () => {
+            socket.off("new_order", handleNewOrder)
+            socket.off("order_status_updated", handleStatusUpdate)
+        }
     }, [user])
 
     return (

@@ -41,6 +41,7 @@ export const Title = styled.div`
     text-align: center;
     max-width: 25rem;
     width: auto;
+    cursor: pointer;
 
     ${DEVICE.lg} {
         flex-direction: column;
