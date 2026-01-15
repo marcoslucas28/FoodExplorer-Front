@@ -49,25 +49,27 @@ export function Favorites(){
             <Content>
                 <h2>Meus favoritos</h2>
 
-                { items.length === 0 ? (
-                        <EmptyState>
-                            <img src={img} alt="Nada encontrado" />
-                            <span>Você não tem nenhum prato favorito ainda.</span>
-                        </EmptyState>
-                    ) :
-                    (items.map(dish => (
-                        <Card key={dish.id}>
-                            <img onClick={() => navigate(`/details/${dish.id}`)} src={api.defaults.baseURL + '/files/' + dish.image} alt={dish.name} />
-                            <div>
-                                <h3 onClick={() => navigate(`/details/${dish.id}`)}>
-                                    {dish.name}
-                                </h3>
-                    
-                                <p onClick={() => deleteFavorite(dish.id)}>Remover dos favoritos</p>
-                            </div>
-                        </Card>
-                    )))
-                }
+                <div>
+                    { items.length === 0 ? (
+                            <EmptyState>
+                                <img src={img} alt="Nada encontrado" />
+                                <span>Você não tem nenhum prato favorito ainda.</span>
+                            </EmptyState>
+                        ) :
+                        (items.map(dish => (
+                            <Card key={dish.id}>
+                                <img onClick={() => navigate(`/details/${dish.id}`)} src={api.defaults.baseURL + '/files/' + dish.image} alt={dish.name} />
+                                <div>
+                                    <h3 onClick={() => navigate(`/details/${dish.id}`)}>
+                                        {dish.name}
+                                    </h3>
+                        
+                                    <p onClick={() => deleteFavorite(dish.id)}>Remover dos favoritos</p>
+                                </div>
+                            </Card>
+                        )))
+                    }
+                </div>
                 
             </Content>
             <Footer />

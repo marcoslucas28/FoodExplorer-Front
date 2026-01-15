@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { DEVICE } from '../../styles/device'
+
 export const Container = styled.div`
     display: grid;
     height: 100vh;
@@ -19,6 +21,20 @@ export const Content = styled.main`
     padding: 2rem;
     margin: 0 auto;
 
+    ${DEVICE.lg}{
+        max-width: 90%;
+    }
+
+    > div {
+        display: flex;
+        flex-direction: column;
+
+        ${DEVICE.lg}{
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    }
+
     > p {
         padding: 1.6rem;
         color: ${({theme}) => theme.COLORS.LIGHT_100};
@@ -27,8 +43,9 @@ export const Content = styled.main`
     
     > h2 {
         color: ${({ theme }) => theme.COLORS.LIGHT_300};
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         margin-bottom: 2rem;
+        font-weight: 400;
     }
 `
 
@@ -38,6 +55,7 @@ export const Card = styled.div`
     padding: 1.6rem 0;
     align-items: center;
     cursor: pointer;
+    max-width: 40rem;
 
     > img {
         width: 30%;

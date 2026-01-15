@@ -70,7 +70,7 @@ export function Header({onMenuClick, onSearchDishes}){
             }
             {
                 !isAdmin  && isDesktop && (
-                    <ButtonText onClick={() => navigate("/orders")} title="Histórico de pedidos" isBigSize={false} />
+                    <ButtonText onClick={() => navigate("/orders")} title="Pedidos" isBigSize={false} />
                 )
             }
 
