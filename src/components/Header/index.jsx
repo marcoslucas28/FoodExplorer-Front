@@ -65,7 +65,7 @@ export function Header({onMenuClick, onSearchDishes}){
 
             {
                 !isAdmin  && isDesktop && (
-                    <ButtonText title="Favoritos" isBigSize={false} />
+                    <ButtonText onClick={() => navigate("/favorites")} title="Favoritos" isBigSize={false} />
                 )
             }
             {

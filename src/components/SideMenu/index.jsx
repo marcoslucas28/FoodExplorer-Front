@@ -57,7 +57,7 @@ export function SideMenu({isVisible = false, onCloseMenu, onSearchDishes}){
                         !user.isAdmin && (
                             <>
                                 <Opition onClick={() => navigate("/orders")} title="Histórico de pedidos" />
-                                <Opition onClick={() => navigate("/orderHistory")} title="Meus favoritos" />
+                                <Opition onClick={() => navigate("/favorites")} title="Meus favoritos" />
                             </>
                         )
                     }
