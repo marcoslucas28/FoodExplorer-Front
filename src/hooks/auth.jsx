@@ -59,26 +59,9 @@ function AuthProvider({children}){
             if(now - parsedSession.timestamp < SESSION_DURATION){
                 setData({user: parsedSession.user})
             } else {
-                // Sessão expirada, limpar
+                
                 handleLogout()
             }
-        }
-    }, [])
-
-    useEffect(() => {
-        // Adicionar interceptor para capturar 401 e deslogar
-        const interceptor = api.interceptors.response.use(
-            (response) => response,
-            (error) => {
-                if (error.response?.status === 401) {
-                    handleLogout()
-                }
-                return Promise.reject(error)
-            }
-        )
-
-        return () => {
-            api.interceptors.response.eject(interceptor)
         }
     }, [])
 

@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { DEVICE } from '../../styles/device'
+
 export const Container = styled.div`
     height: 100vh;
     width: 100%;
@@ -21,9 +23,19 @@ export const Content = styled.main`
     gap: 1.7rem;
     margin: 0 auto;
 
+    ${DEVICE.lg}{
+        max-width: 90%;
+        width: 100%;
+    }
+
     > h2 {
         color: ${({theme}) => theme.COLORS.LIGHT_300};
         font-size: 2rem;
+
+        ${DEVICE.lg}{
+            font-weight: 500;
+            font-size: 2.7rem;
+        }
     }
 `
 
@@ -44,3 +56,4 @@ export const EmptyState = styled.div`
         text-align: center;
     }
 `
+

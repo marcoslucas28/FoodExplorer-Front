@@ -7,6 +7,7 @@ import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { OrderCard } from '../../components/OrderCard'
 import { SideMenu } from '../../components/SideMenu'
+import { Table } from '../../components/Table'
 
 import { useBreakpoint } from '../../hooks/useBreakpoint'
 import { SCREEN } from '../../styles/device'
@@ -102,9 +103,13 @@ export function OrderHistory(){
                             <span>Você não tem nenhum pedido ainda</span>
                         </EmptyState>
                     ) :
-                    (orderedOrders.map(order => (
+                    ( !isDesktop ?
+                        ( orderedOrders.map(order => (
                         <OrderCard key={order.id} data={order} />
-                    )))
+                    )) ) : (
+                        <Table data={orderedOrders} />
+                    )
+                )
                 }
             </Content>
             <Footer />
